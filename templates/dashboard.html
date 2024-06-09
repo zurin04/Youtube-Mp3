@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* Styles for the navigation bar */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        
+        nav li {
+            display: inline;
+        }
+        
+        nav a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        
+        nav a:hover {
+            background-color: #45a049;
+        }
+        
+        /* Existing styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons a, .buttons button {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .buttons a:hover, .buttons button:hover {
+            background-color: #45a049;
+        }
+        .history {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .history li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Welcome, {{ session['username'] }}!</h1>
+        <p>You are now logged in.</p>
+        <div class="buttons">
+            <a href="/">Convert Another Video</a>
+            <button onclick="buyCredit()">Buy Credit</button>
+        </div>
+        <div class="history">
+            <h2>Download History</h2>
+            <ul>
+                {% for item in download_history %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <script>
+        function buyCredit() {
+            alert("Redirecting to payment gateway...");
+            // Implement the logic for buying credit
+        }
+    </script>
+</body>
+</html>
