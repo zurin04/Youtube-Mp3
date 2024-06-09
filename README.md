@@ -56,4 +56,4 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 Contributions are welcome! Please submit a pull request or open an issue to discuss what you would like to change.
 
 ## Contact
-For any inquiries or support, please contact [your-email@example.com](sebuguerojanmark@gmail.com).
+For any inquiries or support, please contact (sebuguerojanmark@gmail.com).
