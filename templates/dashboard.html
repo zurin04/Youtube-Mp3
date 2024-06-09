@@ -4,120 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Font Awesome for icons -->
     <style>
         /* Styles for the navigation bar */
         nav {
             background-color: #333;
             overflow: hidden;
         }
-        
+
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             text-align: center;
         }
-        
+
         nav li {
             display: inline;
         }
-        
+
         nav a {
             display: inline-block;
             color: white;
             padding: 14px 20px;
             text-decoration: none;
         }
-        
+
         nav a:hover {
             background-color: #45a049;
         }
-        
-        /* Existing styles */
+
+        /* Global styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
-            text-align: center;
         }
         .container {
-            max-width: 600px;
-            margin: 50px auto;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
             color: #333;
+            margin-bottom: 10px;
         }
-        .buttons {
-            margin-top: 20px;
+        p {
+            color: #666;
+            margin-bottom: 20px;
         }
-        .buttons a, .buttons button {
-            text-decoration: none;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+        .credit {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
-        .buttons a:hover, .buttons button:hover {
-            background-color: #45a049;
+        .credit h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .credit p {
+            color: #45a049;
+            font-size: 24px;
         }
         .history {
-            margin-top: 20px;
-            text-align: left;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .history h2 {
+            color: #333;
+            margin-bottom: 10px;
         }
         .history ul {
-            list-style-type: none;
             padding: 0;
+            list-style-type: none;
         }
         .history li {
-            background-color: #f9f9f9;
-            margin: 5px 0;
+            margin-bottom: 10px;
             padding: 10px;
-            border: 1px solid #ddd;
+            background-color: #f9f9f9;
             border-radius: 4px;
+            border-left: 4px solid #45a049;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .credit, .history {
+                padding: 15px;
+            }
+            .credit p {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation bar -->
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
+            {% if 'username' in session %}
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
+            {% endif %}
         </ul>
     </nav>
+
+    <!-- Container -->
     <div class="container">
-        <h1>Welcome, {{ session['username'] }}!</h1>
+        <h1>Welcome, {{ username }}!</h1>
         <p>You are now logged in.</p>
-        <div class="buttons">
-            <a href="/">Convert Another Video</a>
-            <button onclick="buyCredit()">Buy Credit</button>
+        <!-- Credit -->
+        <div class="credit">
+            <h2>Credit Remaining</h2>
+            <p>{{ credit_remaining }}</p>
+            <a href="/buycredit" class="buy-credit-button">Buy Credit</a>
         </div>
+        <!-- Download History -->
         <div class="history">
             <h2>Download History</h2>
             <ul>
                 {% for item in download_history %}
-                    <li>{{ item }}</li>
+                    <li><i class="fas fa-download"></i> {{ item.filename }}</li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-    <script>
-        function buyCredit() {
-            alert("Redirecting to payment gateway...");
-            // Implement the logic for buying credit
-        }
-    </script>
 </body>
 </html>
